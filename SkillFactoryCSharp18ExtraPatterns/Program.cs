@@ -1,24 +1,19 @@
 ﻿
-namespace BuilderTask
+namespace SkillFactoryCSharp18ExtraPatterns
 {
+    /// <summary>
+    ///  Клиентский код
+    /// </summary>
     class Program
     {
-        /// <summary>
-        ///  Клиентский код
-        /// </summary>
-        static void Main()
+        static void Main(string[] args)
         {
-            BaseClass myObject = new ImplementationOne(1);
-            myObject.GetId();
+            Pult pult = new Pult();
+            Gate gate = new Gate();
 
-            BaseClass clone = myObject.Clone();
-            clone.GetId();
-
-            myObject = new ImplementationTwo(2);
-            myObject.GetId();
-
-            clone = myObject.Clone();
-            clone.GetId();
+            pult.SetAction(new GateOpenAction(gate));
+            pult.OpenButton();
+            pult.CloseButton();
         }
-    } 
+    }
 }
