@@ -1,33 +1,24 @@
-﻿using BuilderTask;
-using System.Text;
+﻿
 namespace BuilderTask
 {
     class Program
     {
         /// <summary>
-        /// Клиентский код
+        ///  Клиентский код
         /// </summary>
-        public static void Main()
+        static void Main()
         {
-            Console.OutputEncoding = Encoding.UTF8;
+            BaseClass myObject = new ImplementationOne(1);
+            myObject.GetId();
 
-            // Объект завода, который будет заниматься производством
-            var carPlant = new CarPlant();
+            BaseClass clone = myObject.Clone();
+            clone.GetId();
 
-            // производство скутеров
-            Conveyor builder = new ScooterConveyor();
-            carPlant.Construct(builder);
-            builder.Product.Show();
+            myObject = new ImplementationTwo(2);
+            myObject.GetId();
 
-            // производство автомобилей
-            builder = new CarConveyor();
-            carPlant.Construct(builder);
-            builder.Product.Show();
-
-            // производство мотоциклов
-            builder = new MotoConveyor();
-            carPlant.Construct(builder);
-            builder.Product.Show();
+            clone = myObject.Clone();
+            clone.GetId();
         }
-    }
+    } 
 }
