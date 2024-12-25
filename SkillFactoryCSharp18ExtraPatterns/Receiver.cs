@@ -26,11 +26,9 @@ namespace SkillFactoryCSharp18ExtraPatterns
         {
             this.client = client;
             string path = Path.GetFullPath(Directory.GetCurrentDirectory() + "/../../../" + "download");
-
-            var streamManifest = await client.Videos.Streams.GetManifestAsync(url);
-
-            var streamInfo = streamManifest.GetMuxedStreams().GetWithHighestVideoQuality();
             Console.WriteLine("Запускаю скачивание видео...");
+            var streamManifest = await client.Videos.Streams.GetManifestAsync(url);
+            var streamInfo = streamManifest.GetMuxedStreams().GetWithHighestVideoQuality();
             await client.Videos.Streams.DownloadAsync(streamInfo, path);
         }
     }

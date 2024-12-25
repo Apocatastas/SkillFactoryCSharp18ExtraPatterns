@@ -7,7 +7,7 @@ namespace SkillFactoryCSharp18ExtraPatterns
     {
         static void Main(string[] args)
         {
-            string s = "https://www.youtube.com/watch?v=x12E4jQsbso";
+            string s = "https://www.youtube.com/watch?v=c9DIoSNoQNs";
 
             Sender sender = new Sender();
             Receiver receiver = new Receiver();
