@@ -1,34 +1,27 @@
-﻿using System;
-using System.Net.Http;
-using System.Threading.Tasks;
+﻿using System.Reflection;
+using YoutubeExplode;
 
-namespace HardCodeExample
+namespace SkillFactoryCSharp18ExtraPatterns
 {
-    class Program
+    internal class Program
     {
-        static async Task Main(string[] args)
+        static void Main(string[] args)
         {
-            string siteUrl = "http://192.250.225.62/";
-            string resourceID = "?965502";
+            string s = "https://www.youtube.com/watch?v=x12E4jQsbso";
 
-            // запрос выгрузки информации с сайта
-            await LoadSite(siteUrl, resourceID);
-        }
+            Sender sender = new Sender();
+            Receiver receiver = new Receiver();
+            YoutubeClient client = new YoutubeClient(); 
 
-        static async Task LoadSite(string siteUrl, string resourceId)
-        {
-            // создаем клиента для http-запросов
-            var httpClient = new HttpClient();
+            CommandGetDesc commandGetDesc = new CommandGetDesc(receiver);
+            sender.SetCommand(commandGetDesc);
+            sender.Run(s, client);
 
-            // задаем адрес сайта
-            httpClient.BaseAddress = new Uri(siteUrl);
+            CommandDownload commandDownload = new CommandDownload(receiver);
+            sender.SetCommand(commandDownload);
+            sender.Run(s, client);
+            Console.ReadKey();
 
-            // запрашиваем нужный ресурс
-            var result = await httpClient.GetAsync(resourceId);
-
-            // считываем ответ в строку и выводим
-            var contentString = await result.Content.ReadAsStringAsync();
-            Console.WriteLine(contentString);
         }
     }
 }
